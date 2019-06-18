@@ -30,35 +30,12 @@
 	<!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-        <script> {
-         function myFunction() {
-            var txtCode = '', str = document.getElementById("teks").value;
-            var len = str.length;
-            for (i = 0; i < len; i++) {
-            txtCode += '&#' + str.charCodeAt(i);
-            }
-            document.getElementById("sendCharacter").value = txtCode;
-            }
-            function clearFunction() {
-            document.getElementById("teks").value = "";
-            document.getElementById("teks").innerHTML = "";
-            }
-
-            function textFunction(text, trans) {
-            document.getElementById("teks").value += String.fromCodePoint(text);
-            if (text === 1617){
-                var s = document.getElementById("transliterasi").innerHTML;
-                var t = s.toString().split("/");
-                document.getElementById("transliterasi").innerHTML += t[t.length-2] + "/";
-            } else{
-                document.getElementById("transliterasi").innerHTML += trans + "/";
-            }
-            }
-            window.onload = clearFunction;
-            </script>
+	<![endif]--> 
+       
 </head>
 <body>
+     <jsp:useBean id="text" class="beans.LampungText"/>
+    <jsp:setProperty name="text" property="text" value='<%=request.getParameter("teks") %>' />
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader">
@@ -69,7 +46,6 @@
         
 	<!-- Header section -->
 	<header class="header-section">
-    
 		<div class="logo">
 			<img src="img/logo_tts.png" alt=""><!-- Logo -->
 		</div>
@@ -84,12 +60,11 @@
 		</nav>
 	</header>
 	<!-- Header section end -->
-        
+  
         <!-- Page header -->
 	<div class="page-top-section">
-		<div class="page-info"></div> 
-                
-                <form action="hasil.jsp" class="form-class"  method="post" >
+		<div class="page-info"></div>                 
+                <form action="index.jsp" class="form-class"  method="post" >
                     <div class="row">	
 			<div class="col-sm-12">		
                             <textarea name="teks" placeholder="Masukan teks"></textarea>	
@@ -99,12 +74,11 @@
                             <div class="element">
 				<div class="buttons">
 				<!--button type="submit" name="submit" class="site-btn mr20"  >Play</button -->
-                                <input class="btn btn-info" type="submit" onclick="myFunction()" value="Play">
-                                <input class="btn btn-danger" type="button" onclick="clearFunction()" value="Clear">
-                                
+                                <input class="btn btn-info" type="submit" value="Play">
+                                <input class="btn btn-danger" type="cancel" value="Clear">  
                                 </div> 
                             </div>
-                        <input type="hidden" id="lampungtext" name="LampungText">
+                        <!-- <input type="hidden" id="LampungText" name="LampungText"> -->
 		</form>
 
 	<!-- Page header end-->
